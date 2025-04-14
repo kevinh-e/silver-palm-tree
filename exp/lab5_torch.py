@@ -6,18 +6,23 @@ import torchvision.transforms as transforms
 import numpy as np
 import matplotlib.pyplot as plt
 import time
+import sys
 
+from torch.utils.tensorboard import SummaryWriter
+
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+
+writer = SummaryWriter("runs/emnist")
 start = time.time()
 
 # enable gpu
-device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 # device = torch.device("cuda" if False else "cpu")
 
 # hyper parameters
 input_size = 784  # 28 x 28
 hidden_size = 500
 num_epochs = 10
-batch_size = 600
+batch_size = 200
 learning_rate = 0.001
 
 # import data
@@ -38,18 +43,24 @@ num_classes = 47
 
 train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
 test_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=False)
-#
-# examples = iter(train_loader)
-# samples, labels = next(examples)
+
+examples = iter(train_loader)
+samples, labels = next(examples)
 #
 # print(samples.shape, labels.shape)
 #
-# for i in range(6):
-#     sub = plt.subplot(2, 3, i + 1)
-#     sub.set_title(f"{labels[i]}")
-#     plt.imshow(samples[i][0], cmap="gray")
+for i in range(6):
+    sub = plt.subplot(2, 3, i + 1)
+    sub.set_title(f"{labels[i]}")
+    plt.imshow(samples[i][0], cmap="gray")
 # plt.show()
 #
+# show a batch of images on tensorboard
+img_grid = torchvision.utils.make_grid(samples)
+writer.add_image("emnist_images", img_grid)
+writer.close()
+
+# sys.exit()
 
 
 # design model
@@ -74,7 +85,17 @@ model = EMNISTModel(input_size, hidden_size, num_classes).to(device)
 criterion = nn.CrossEntropyLoss()
 optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
 
+sample_input = samples.reshape(-1, 28 * 28).to(device)
+
+# visualise model with tensorboard
+writer.add_graph(model, sample_input)
+writer.close()
+
 n_steps = len(train_loader)
+
+# vars to keep track of training accuracy
+running_loss = 0.0
+running_correct = 0
 
 # training loop
 for epoch in range(num_epochs):
@@ -96,10 +117,20 @@ for epoch in range(num_epochs):
         # update weights
         optimizer.step()
 
+        running_loss += loss.item()
+        _, predicted = torch.max(prediction.data, 1)
+        running_correct += (predicted == labels).sum().item()
+
         if i % 100 == 0:
             print(
                 f"epoch: {epoch + 1}, step: {i + 1} / {n_steps}, loss: {loss.item():.6f}"
             )
+
+            # tensorboard scalars to keep track of training
+            writer.add_scalar("training loss", running_loss / 100, epoch * n_steps + i)
+            writer.add_scalar("accuracy", running_correct / 100, epoch * n_steps + i)
+            running_loss = 0.0
+            running_correct = 0
 
 end = time.time()
 print(f"Training time: {end - start:.4f} seconds")
