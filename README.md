@@ -41,17 +41,23 @@
     <li>
       <a href="#about-the-project">About The Project</a>
       <ul>
-        <li><a href="#built-with">Built With</a></li>
+        <li><a href="#what-i-learned">What I learned</a></li>
       </ul>
     </li>
     <li>
-      <a href="#getting-started">Getting Started</a>
+      <a href="#results">Model Results</a>
+      <ul>
+        <li><a href="#training-setup">Training setup</a></li>
+        <li><a href="#final-model-performance">Model performance</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#usage">Usage</a>
       <ul>
         <li><a href="#prerequisites">Prerequisites</a></li>
         <li><a href="#installation">Installation</a></li>
       </ul>
     </li>
-    <li><a href="#usage">Usage</a></li>
     <li><a href="#roadmap">Roadmap</a></li>
     <li><a href="#contributing">Contributing</a></li>
     <li><a href="#license">License</a></li>
@@ -64,6 +70,7 @@
 ## About The Project
 
 [![Python][Python.org]][Python-url] [![PyTorch][PyTorch.org]][Pytorch-url]
+
 This project is part of my self-taught deep learning journey, where I’ve built and trained convolutional neural networks (CNNs) from scratch using PyTorch. The goal was to understand the entire training pipeline—data preprocessing, model architecture, training loops, evaluation, and optimization—without relying on pre-trained models.
 
 The final models are interpreted replicas of the famous [*Deep Residual Learning for Image Recognition*](https://arxiv.org/abs/1512.03385) paper that won the 2015 ImageNet [ILSVRC](https://image-net.org/challenges/LSVRC/).
@@ -71,12 +78,12 @@ The final models are interpreted replicas of the famous [*Deep Residual Learning
 The project includes the implementation and training of two key models:
 
 1. ResNet-20 for CIFAR-10
-A classic deep residual network, implemented from the ground up and trained on the CIFAR-10 dataset. This model follows the architecture and training procedure described in the original ResNet paper, including data augmentation, multi-step learning rate scheduling, and weight decay.
+A classic deep residual network, implemented from the ground up and trained on the [CIFAR-10](https://www.cs.toronto.edu/~kriz/cifar.html) dataset. This model follows the architecture and training procedure described in the original [ResNet](https://arxiv.org/abs/1512.03385) paper, including data augmentation, multi-step learning rate scheduling, and weight decay.
 
 2. Custom CNN on a Kaggle Open Dataset
 A second model trained on an open-source dataset from [Kaggle](https://www.kaggle.com/datasets/ruhulaminsharif/eye-disease-image-dataset), showcasing flexibility in applying deep learning fundamentals to a different, real-world dataset. This part of the project involved adapting preprocessing steps and tuning hyperparameters based on the unique characteristics of the dataset.
 
-📚 What I Learned:
+### What I Learned
 
 - Building CNN architectures (including residual blocks) from scratch
 - Dataset handling with torchvision and custom transformations
@@ -91,21 +98,23 @@ A second model trained on an open-source dataset from [Kaggle](https://www.kaggl
 
 Results are recorded from models trained locally on my setup:
 
-### 🛠️ Training Setup
+### Training Setup
 
 - GPU: AMD Navi 21 RX 6900XT
 - PyTorch: PyTorch (2.6.0) ROCm 6.2.4
 - OS: Ubuntu 24.04.2
 
-### 📊 Final Model Performance
+### Final Model Performance
 
 | Model         | Dataset      | Test Accuracy | Epochs | Parameters     | Training Time (s) |
 |---------------|--------------|---------------|--------|----------------|-------------------|
 | ResNet-20     | CIFAR-10     | 86.51%        | 64     | 0.27 Million   | 806.1353          |
 | ResNet-20     | CIFAR-10     | 91.10%        | 128    | 0.27 Million   | 1607.8371         |
+| ResNet-44     | CIFAR-10     | 91.10%        | 128    | 0.66 Million   | 1607.8371         |
+| ResNet-56     | Eye Disease  | 91.10%        | 150    | 0.66 Million   | 1607.8371         |
 
 <!-- GETTING STARTED -->
-## Run the project
+## Usage
 
 Here is a guide to setting up the project locally.
 
@@ -118,40 +127,84 @@ Ensure you have the following:
 
 ### Installation
 
-1.
-2. Clone the repo
+1. Clone the repo
 
    ```sh
-   git clone https://github.com/github_username/repo_name.git
+   git clone https://github.com/kevinh-e/silver-palm-tree.git
+   cd silver-palm-tree
+
    ```
 
-3. Install NPM packages
+2. Setup Python venv
 
    ```sh
-   npm install
+   python3 -m venv venv
+   source venv/bin/activate
    ```
 
-4. Enter your API in `config.js`
-
-   ```js
-   const API_KEY = 'ENTER YOUR API';
-   ```
-
-5. Change git remote url to avoid accidental pushes to base project
+3. Install packages
 
    ```sh
-   git remote set-url origin github_username/repo_name
-   git remote -v # confirm the changes
+   pip install -r requirements.txt
    ```
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+4. Install PyTorch for your setup:
+-[PyTorch get started](https://pytorch.org/get-started/locally/)
 
-<!-- USAGE EXAMPLES -->
-## Usage
+Now you can either train the model yourself or use the pretrained ones.
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
+#### Train models locally
 
-*For more examples, please refer to the [Documentation](https://example.com)*
+You can train the models on your own hardware by specifying the output path for the model
+Train the CIFAR10 Model:
+
+   ```sh
+   python3 src/train_cifar.py [modelname] [epochs] output
+   ```
+
+Train the Eye Disease Model:
+
+   ```sh
+   python3 src/train_eye.py [modelname] [epochs] output
+   ```
+
+### Testing your own images
+
+You can test your own images to see which output class the model outputs.
+
+#### Label Reference
+
+| **CIFAR-10**           | **Eye Disease Dataset**                         |
+|------------------------|--------------------------------------------------|
+| Airplane               | Central Serous Chorioretinopathy - Color Fundus |
+| Automobile             | Diabetic Retinopathy                            |
+| Bird                   | Disc Edema                                      |
+| Cat                    | Glaucoma                                        |
+| Deer                   | Healthy                                         |
+| Dog                    | Macular Scar                                    |
+| Frog                   | Myopia                                          |
+| Horse                  | Pterygium                                       |
+| Ship                   | Retinal Detachment                              |
+| Truck                  | Retinitis Pigmentosa                            |
+
+Run the pretrained CIFAR10 Model (ResNet-44 [128]):
+
+   ```sh
+   python3 src/test_cifar.py [modelname]
+   ```
+
+Run the pretrained Eye Disease Model (ResNet-56 [150]):
+
+   ```sh
+   python3 src/test_eye.py [modelname]
+   ```
+
+You can test run the models you trained on your own images as long as they are in the project directory:
+
+   ```sh
+   python3 src/test_cifar.py -c modelpath imagepath
+   python3 src/test_eye.py -c modelpath imagepath
+   ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -174,7 +227,7 @@ See the [open issues](https://github.com/othneildrew/Best-README-Template/issues
 <!-- LICENSE -->
 ## License
 
-Distributed under the Unlicense License. See `LICENSE.txt` for more information.
+Distributed under the Apache-2.0 License. See `LICENSE.txt` for more information.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -205,17 +258,15 @@ Use this space to list resources you find helpful and would like to give credit 
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[forks-shield]: https://img.shields.io/github/forks/othneildrew/Best-README-Template.svg?style=for-the-badge
-[forks-url]: https://github.com/othneildrew/Best-README-Template/network/members
 [stars-shield]: https://img.shields.io/github/stars/othneildrew/Best-README-Template.svg?style=for-the-badge
-[stars-url]: https://github.com/othneildrew/Best-README-Template/stargazers
+[stars-url]: https://github.com/kevinh-e/silver-palm-tree/stargazers
 [issues-shield]: https://img.shields.io/github/issues/othneildrew/Best-README-Template.svg?style=for-the-badge
-[issues-url]: https://github.com/othneildrew/Best-README-Template/issues
-[license-shield]: https://img.shields.io/github/license/othneildrew/Best-README-Template.svg?style=for-the-badge
-[license-url]: https://github.com/othneildrew/Best-README-Template/blob/master/LICENSE.txt
+[issues-url]: https://github.com/kevinh-e/silver-palm-tree/issues
+[license-shield]: https://img.shields.io/badge/license-Apache%202.0-blue?style=flat-square
+[license-url]: https://github.com/kevinh-e/silver-palm-tree/blob/main/LICENSE
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
-[linkedin-url]: https://linkedin.com/in/othneildrew
-[Python.org]: https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white
+[linkedin-url]: https://www.linkedin.com/in/kevinhedev/
+[Python.org]: https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54
 [Python-url]: https://www.python.org/
-[PyTorch.org]:https://pytorch.org/
+[PyTorch.org]:https://img.shields.io/badge/PyTorch-EE4C2C?style=for-the-badge&logo=pytorch&logoColor=white
 [PyTorch-url]:https://pytorch.org/
