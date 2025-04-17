@@ -16,12 +16,12 @@
 *** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
 *** https://www.markdownguide.org/basic-syntax/#reference-style-links
 -->
-[![Stargazers][stars-shield]][stars-url]
-[![Apache 2.0 License][license-shield]][license-url]
-[![LinkedIn][linkedin-shield]][linkedin-url]
-
+<div align"center">
+    <img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/kevinh-e/silver-palm-tree?style=flat&color=gold">
+    <img alt="License" src="https://img.shields.io/badge/Apache_2.0-License-blue?style=flat&logo=apache">
+    <img alt="LinkedIn" src="https://img.shields.io/badge/%40kevinhedev-linkedin-blue?style=flat">
+</div>
 <!-- PROJECT LOGO -->
-<br />
 <div align="center">
   <h2 align="center">CIFAR10 and Eye Disease ResNet models</h2>
 
@@ -123,7 +123,7 @@ Ensure you have the following:
 - python (3.13.3)
 - CUDA / ROCm installed if availiable (CPU training takes a very long time)
 
-### Installation
+Badge### Installation
 
 1. Clone the repo
 
@@ -206,21 +206,6 @@ You can test run the models you trained on your own images as long as they are i
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-<!-- ROADMAP -->
-## Roadmap
-
-- [x] Add Changelog
-- [x] Add back to top links
-- [ ] Add Additional Templates w/ Examples
-- [ ] Add "components" document to easily copy & paste sections of the readme
-- [ ] Multi-language Support
-  - [ ] Chinese
-  - [ ] Spanish
-
-See the [open issues](https://github.com/othneildrew/Best-README-Template/issues) for a full list of proposed features (and known issues).
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
 <!-- CONTRIBUTING -->
 <!-- LICENSE -->
 ## License
@@ -232,16 +217,16 @@ Distributed under the Apache-2.0 License. See `LICENSE.txt` for more information
 <!-- CONTACT -->
 ## Contact
 
-Your Name - [@your_twitter](https://twitter.com/your_username) - <email@example.com>
-
-Project Link: [https://github.com/your_username/repo_name](https://github.com/your_username/repo_name)
+Website - <https://kevinh.dev/>
+Email - <contact@kevinh.dev>
+Project Link: [https://github.com/kevinh-e/silver-palm-tree](https://github.com/kevinh-e/silver-palm-tree)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- ACKNOWLEDGMENTS -->
 ## Acknowledgments
 
-Use this space to list resources you find helpful and would like to give credit to. I've included a few of my favorites to kick things off!
+Papers and resources
 
 - [Choose an Open Source License](https://choosealicense.com)
 - [GitHub Emoji Cheat Sheet](https://www.webpagefx.com/tools/emoji-cheat-sheet)
@@ -256,12 +241,6 @@ Use this space to list resources you find helpful and would like to give credit 
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[stars-shield]: https://img.shields.io/github/stars/kevinh-e/silver-palm-tree?style=flat
-[stars-url]: https://github.com/kevinh-e/silver-palm-tree/stargazers
-[license-shield]: https://img.shields.io/badge/license-Apache%202.0-blue?style=flat-square
-[license-url]: https://github.com/kevinh-e/silver-palm-tree/blob/main/LICENSE
-[linkedin-shield]: https://img.shields.io/badge/%40kevinhedev-linkedin-blue?style=flat
-[linkedin-url]: <https://www.linkedin.com/in/kevinhedev/>
 [Python.org]: <https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54>
 [Python-url]: <https://www.python.org/>
 [PyTorch.org]:<https://img.shields.io/badge/PyTorch-EE4C2C?style=for-the-badge&logo=pytorch&logoColor=white>
