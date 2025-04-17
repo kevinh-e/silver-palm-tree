@@ -22,3 +22,7 @@
     Test Loss: 0.3360, Test Accuracy: 0.9110
     Final test accuracy: [0.9110] | Time take: [1607.8371]
     Epochs: [128] | Iterations: [391 / 50048]
+3.ResNet-44
+    Test Loss: 0.3089, Test Accuracy: 0.9281
+    Final test accuracy: [0.9281] | Time take: [3171.6705]
+    Epochs: [128] | Iterations: [391 / 50048]

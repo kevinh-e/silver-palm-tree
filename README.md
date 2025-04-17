@@ -16,10 +16,8 @@
 *** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
 *** https://www.markdownguide.org/basic-syntax/#reference-style-links
 -->
-[![Forks][forks-shield]][forks-url]
 [![Stargazers][stars-shield]][stars-url]
-[![Issues][issues-shield]][issues-url]
-[![Unlicense License][license-shield]][license-url]
+[![Apache 2.0 License][license-shield]][license-url]
 [![LinkedIn][linkedin-shield]][linkedin-url]
 
 <!-- PROJECT LOGO -->
@@ -110,7 +108,7 @@ Results are recorded from models trained locally on my setup:
 |---------------|--------------|---------------|--------|----------------|-------------------|
 | ResNet-20     | CIFAR-10     | 86.51%        | 64     | 0.27 Million   | 806.1353          |
 | ResNet-20     | CIFAR-10     | 91.10%        | 128    | 0.27 Million   | 1607.8371         |
-| ResNet-44     | CIFAR-10     | 91.10%        | 128    | 0.66 Million   | 1607.8371         |
+| ResNet-44     | CIFAR-10     | 92.81%        | 128    | 0.66 Million   | 3171.6705         |
 | ResNet-56     | Eye Disease  | 91.10%        | 150    | 0.66 Million   | 1607.8371         |
 
 <!-- GETTING STARTED -->
@@ -258,10 +256,8 @@ Use this space to list resources you find helpful and would like to give credit 
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[stars-shield]: https://img.shields.io/github/stars/othneildrew/Best-README-Template.svg?style=for-the-badge
+[stars-shield]: https://img.shields.io/github/stars/kevinh-e/silver-palm-tree?style=flat
 [stars-url]: https://github.com/kevinh-e/silver-palm-tree/stargazers
-[issues-shield]: https://img.shields.io/github/issues/othneildrew/Best-README-Template.svg?style=for-the-badge
-[issues-url]: https://github.com/kevinh-e/silver-palm-tree/issues
 [license-shield]: https://img.shields.io/badge/license-Apache%202.0-blue?style=flat-square
 [license-url]: https://github.com/kevinh-e/silver-palm-tree/blob/main/LICENSE
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
