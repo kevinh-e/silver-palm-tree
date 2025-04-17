@@ -23,7 +23,7 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <h3 align="center">CIFAR10 and Eye Disease ResNet models</h3>
+  <h2 align="center">CIFAR10 and Eye Disease ResNet models</h2>
 
   <p align="center">
     Deep Learning self taught project including multiple CNN and Residual CNN models
@@ -260,9 +260,9 @@ Use this space to list resources you find helpful and would like to give credit 
 [stars-url]: https://github.com/kevinh-e/silver-palm-tree/stargazers
 [license-shield]: https://img.shields.io/badge/license-Apache%202.0-blue?style=flat-square
 [license-url]: https://github.com/kevinh-e/silver-palm-tree/blob/main/LICENSE
-[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
-[linkedin-url]: https://www.linkedin.com/in/kevinhedev/
-[Python.org]: https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54
-[Python-url]: https://www.python.org/
-[PyTorch.org]:https://img.shields.io/badge/PyTorch-EE4C2C?style=for-the-badge&logo=pytorch&logoColor=white
-[PyTorch-url]:https://pytorch.org/
+[linkedin-shield]: https://img.shields.io/badge/%40kevinhedev-linkedin-blue?style=flat
+[linkedin-url]: <https://www.linkedin.com/in/kevinhedev/>
+[Python.org]: <https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54>
+[Python-url]: <https://www.python.org/>
+[PyTorch.org]:<https://img.shields.io/badge/PyTorch-EE4C2C?style=for-the-badge&logo=pytorch&logoColor=white>
+[PyTorch-url]:<https://pytorch.org/>
