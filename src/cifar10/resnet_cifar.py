@@ -3,11 +3,13 @@ import torch.nn.functional as F
 
 # -- Residual block --
 
+
 class ResidualBlock(nn.Module):
     """
     Basic Residual Block following ResNet-18/34
     Folows the structure describe in the paper
     """
+
     expansion = 1
 
     def __init__(self, in_planes, planes, stride=1):
@@ -24,11 +26,15 @@ class ResidualBlock(nn.Module):
 
         # First conv layer [3x3 kernel | output = planes | padding = 1]
         # No bias needed (batch norm)
-        self.conv1 = nn.Conv2d(in_planes, planes, kernel_size=3, stride=stride, padding=1, bias=False)
+        self.conv1 = nn.Conv2d(
+            in_planes, planes, kernel_size=3, stride=stride, padding=1, bias=False
+        )
         self.bn1 = nn.BatchNorm2d(planes)
 
         # Second conv layer [stride = 1]
-        self.conv2 = nn.Conv2d(planes, planes, kernel_size=3, stride=1, padding=1, bias=False))
+        self.conv2 = nn.Conv2d(
+            planes, planes, kernel_size=3, stride=1, padding=1, bias=False
+        )
         self.bn2 = nn.BatchNorm2d(planes)
 
         # Shortcut connection using Sequential (will be identity function)
@@ -38,8 +44,8 @@ class ResidualBlock(nn.Module):
         # self.expansion*planes is just planes in ResidualBlock
         if stride != 1 or in_planes != planes:
             self.shortcut = nn.Sequential(
-                nn.Conv2d(in_planes,planes, kernel_size=1, stride=stride, bias=False),
-                nn.BatchNorm2d(planes)
+                nn.Conv2d(in_planes, planes, kernel_size=1, stride=stride, bias=False),
+                nn.BatchNorm2d(planes),
             )
 
     def forward(self, x):
@@ -56,7 +62,9 @@ class ResidualBlock(nn.Module):
         out = F.relu(out)
         return out
 
+
 # -- ResNet Model --
+
 
 class ResNet(nn.Module):
     """
@@ -83,7 +91,7 @@ class ResNet(nn.Module):
         # Create ResidualBlock layers
         # [32x32 -> 16 filters | num_blocks = num_blocks[0] | stride = 1] *no downsampling
         self.layer1 = self._make_layer(block, 16, num_blocks[0], stride=1)
-        
+
         # [16x16 -> 32 filters | num_blocks = num_blocks[1] | stride = 2] * downsampled 2x
         self.layer2 = self._make_layer(block, 32, num_blocks[1], stride=2)
 
@@ -91,7 +99,7 @@ class ResNet(nn.Module):
         self.layer3 = self._make_layer(block, 64, num_blocks[1], stride=2)
 
         # final fc layer to output 10 classes
-        self.fc1 = nn.Linear(64*block.expansion, num_classes)
+        self.fc1 = nn.Linear(64 * block.expansion, num_classes)
 
     def _make_layer(self, block, planes, num_blocks, stride):
         """
@@ -109,7 +117,7 @@ class ResNet(nn.Module):
 
         # Calculate the number of strides for each block
         # Subsequent strides do not downsample
-        strides = [stride] + [1]*(num_blocks -1)
+        strides = [stride] + [1] * (num_blocks - 1)
         layers = []
         for stride in strides:
             layers.append(block(self.in_planes, planes, stride))

@@ -1,6 +1,8 @@
 from resnet_cifar import ResidualBlock, ResNet
 
 import os
+import time
+import math
 import torch
 import torch.nn as nn
 import torchvision.datasets as datasets
@@ -14,7 +16,7 @@ MODELPATH = "./models/RESNET_CIFAR10"
 
 # Hyper parameters
 batch_size = 128
-n_epochs = 20
+n_epochs = 128
 num_classes = 10
 # as specified in Sec 4.2
 learning_rate = 0.1
@@ -170,16 +172,16 @@ def evaluate(model, device, loader, criterion, writer):
 if __name__ == "__main__":
     # Set GPU if is_available
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    writer = SummaryWriter("runs/ResNet/")
+    writer = SummaryWriter("runs/ResNet/44|128")
 
     _, _, trainloader, testloader = load_data(DATAPATH)
 
-    net = ResNet20().to(device)
-    print("ResNet-20:")
+    net = ResNet44().to(device)
+    print("ResNet-44:")
 
     # Parameter count
     total_params = sum(p.numel() for p in net.parameters() if p.requires_grad)
-    print(f"\nResNet-20 Total Trainable Parameters: {total_params:,}")
+    print(f"\nResNet-44 Total Trainable Parameters: {total_params:,}")
 
     # loss, optimizer and scheduler exactly as specified in Sec 4.2 (by epoch)
     criterion = nn.CrossEntropyLoss()
@@ -193,11 +195,20 @@ if __name__ == "__main__":
     # ensure model path exists
     os.makedirs(MODELPATH, exist_ok=True)
 
+    start = time.time()
     train_model(net, device, trainloader, criterion, optimizer, scheduler, writer)
+    end = time.time()
     final_accuracy = evaluate(net, device, testloader, criterion, writer)
-    print(f"Final test accuracy: [{final_accuracy:.4f}]")
+    print(
+        f"Final test accuracy: [{final_accuracy:.4f}] | Time take: [{end - start:.4f}]"
+    )
+    iterations_per_epoch = math.ceil(50000 / batch_size)  # ~391
+    total_iterations = iterations_per_epoch * n_epochs  # 391 * 64 = 25,024
+    print(
+        f"Epochs: [{n_epochs}] | Iterations: [{iterations_per_epoch} / {total_iterations}]"
+    )
 
-    save_path = os.path.join(MODELPATH, "resnet20_cifar10.pth")
+    save_path = os.path.join(MODELPATH, "resnet44_cifar10(128).pth")
     torch.save(net.state_dict(), save_path)
     print(f"Model state_dict saved to {save_path}")
 
