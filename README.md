@@ -31,7 +31,6 @@
     Deep Learning self taught project including multiple CNN and Residual CNN models
     <a href="https://github.com/kevinh-e/silver-palm-tree/issues/new?labels=bug&template=bug-report---.md">Report Bug</a>
     <br />
-    [![JQuery][JQuery.com]][JQuery-url]
   </p>
 </div>
 
@@ -64,7 +63,10 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-This project is part of my self-taught deep learning journey, where I’ve built and trained convolutional neural networks (CNNs) from scratch using PyTorch. The goal was to understand the entire training pipeline—data preprocessing, model architecture, training loops, evaluation, and optimization—without relying on high-level abstractions or pre-trained models.
+[![Python][Python.org]][Python-url] [![PyTorch][PyTorch.org]][Pytorch-url]
+This project is part of my self-taught deep learning journey, where I’ve built and trained convolutional neural networks (CNNs) from scratch using PyTorch. The goal was to understand the entire training pipeline—data preprocessing, model architecture, training loops, evaluation, and optimization—without relying on pre-trained models.
+
+The final models are interpreted replicas of the famous [*Deep Residual Learning for Image Recognition*](https://arxiv.org/abs/1512.03385) paper that won the 2015 ImageNet [ILSVRC](https://image-net.org/challenges/LSVRC/).
 
 The project includes the implementation and training of two key models:
 
@@ -84,29 +86,39 @@ A second model trained on an open-source dataset from [Kaggle](https://www.kaggl
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+<!-- model results-->
+## Results
+
+Results are recorded from models trained locally on my setup:
+
+### 🛠️ Training Setup
+
+- GPU: AMD Navi 21 RX 6900XT
+- PyTorch: PyTorch (2.6.0) ROCm 6.2.4
+- OS: Ubuntu 24.04.2
+
+### 📊 Final Model Performance
+
+| Model         | Dataset      | Test Accuracy | Epochs | Parameters     | Training Time (s) |
+|---------------|--------------|---------------|--------|----------------|-------------------|
+| ResNet-20     | CIFAR-10     | 86.51%        | 64     | 0.27 Million   | 806.1353          |
+| ResNet-20     | CIFAR-10     | 91.10%        | 128    | 0.27 Million   | 1607.8371         |
 
 <!-- GETTING STARTED -->
-## Getting Started
+## Run the project
 
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
+Here is a guide to setting up the project locally.
 
 ### Prerequisites
 
-This is an example of how to list things you need to use the software and how to install them.
+Ensure you have the following:
 
-- npm
-
-  ```sh
-  npm install npm@latest -g
-  ```
+- python (3.13.3)
+- CUDA / ROCm installed if availiable (CPU training takes a very long time)
 
 ### Installation
 
-_Below is an example of how you can instruct your audience on installing and setting up your app. This template doesn't rely on any external dependencies or services._
-
-1. Get a free API Key at [https://example.com](https://example.com)
+1.
 2. Clone the repo
 
    ```sh
@@ -139,7 +151,7 @@ _Below is an example of how you can instruct your audience on installing and set
 
 Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
 
-_For more examples, please refer to the [Documentation](https://example.com)_
+*For more examples, please refer to the [Documentation](https://example.com)*
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -159,27 +171,6 @@ See the [open issues](https://github.com/othneildrew/Best-README-Template/issues
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- CONTRIBUTING -->
-## Contributing
-
-Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
-
-If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
-Don't forget to give the project a star! Thanks again!
-
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-### Top contributors
-
-<a href="https://github.com/othneildrew/Best-README-Template/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=othneildrew/Best-README-Template" alt="contrib.rocks image" />
-</a>
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
 <!-- LICENSE -->
 ## License
 
@@ -224,3 +215,7 @@ Use this space to list resources you find helpful and would like to give credit 
 [license-url]: https://github.com/othneildrew/Best-README-Template/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/othneildrew
+[Python.org]: https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white
+[Python-url]: https://www.python.org/
+[PyTorch.org]:https://pytorch.org/
+[PyTorch-url]:https://pytorch.org/

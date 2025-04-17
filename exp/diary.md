@@ -10,3 +10,15 @@
 4. changed hidden layer and activation functions (68.44% | 92.1414)
     256 -> 120 -> 10
     added a second ReLu(0.02) on second conv and second linear layer
+
+## CIFAR10 | ResNet
+
+1.ResNet-20
+    Test Loss: 0.4313, Test Accuracy: 0.8651
+    Final test accuracy: [0.8651] | Time take: [806.1353]
+    Epochs: [64] | Iterations: [391 / 25024]
+    - Better than transfer learning !!!!! (slower though)
+2.ResNet-20
+    Test Loss: 0.3360, Test Accuracy: 0.9110
+    Final test accuracy: [0.9110] | Time take: [1607.8371]
+    Epochs: [128] | Iterations: [391 / 50048]
