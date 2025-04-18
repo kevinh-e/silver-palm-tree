@@ -109,7 +109,11 @@ Results are recorded from models trained locally on my setup:
 | ResNet-20     | CIFAR-10     | 86.51%        | 64     | 0.27 Million   | 806.1353          |
 | ResNet-20     | CIFAR-10     | 91.10%        | 128    | 0.27 Million   | 1607.8371         |
 | ResNet-44     | CIFAR-10     | 92.81%        | 128    | 0.66 Million   | 3171.6705         |
-| ResNet-56     | Eye Disease  | 91.10%        | 150    | 0.66 Million   | 1607.8371         |
+| ResNet-110    | CIFAR-10     | 92.93%        | 156    | 1.73 Million   | 9066.0921|
+| Model         | Dataset      | Test Accuracy | Epochs | Parameters     | Training Time (s) |
+|---------------|--------------|---------------|--------|----------------|-------------------|
+| ResNet-32     | Eye Disease  | 91.10%        | 156    | 0.66 Million   | 1607.8371         |
+| ResNet-56     | Eye Disease  | 91.10%        | 156    | 0.66 Million   | 1607.8371         |
 
 <!-- GETTING STARTED -->
 ## Usage
@@ -157,14 +161,16 @@ You can train the models on your own hardware by specifying the output path for 
 Train the CIFAR10 Model:
 
    ```sh
-   python3 src/train_cifar.py [modelname] [epochs] output
+   python3 src/train_cifar.py modelname [epochs] [output]
    ```
 
 Train the Eye Disease Model:
 
    ```sh
-   python3 src/train_eye.py [modelname] [epochs] output
+   python3 src/train_eye.py modelname [epochs] [output]
    ```
+
+Trained models are stored in `./models/(RESNET_CIFAR10 | RESNET_EYE)/`
 
 ### Testing your own images
 
