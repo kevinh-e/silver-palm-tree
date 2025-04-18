@@ -1,6 +1,8 @@
 from resnet_cifar import ResidualBlock, ResNet
 
 import os
+import sys
+import argparse
 import time
 import math
 import torch
@@ -53,6 +55,37 @@ def ResNet44():
     """
     # 6n + 2 = 6*7 + 2 = 44
     return ResNet(ResidualBlock, [7, 7, 7])
+
+
+def ResNet56():
+    """
+    Creates a ResNet-56 Model for CIFAR10
+            (n=9)
+    Returns:
+        (ResNet)
+    """
+    # 6n + 2 = 6*9 + 2 = 44
+    return ResNet(ResidualBlock, [9, 9, 9])
+
+
+def ResNet110():
+    """
+    Creates a ResNet-110 Model for CIFAR10
+            (n=18)
+    Returns:
+        (ResNet)
+    """
+    # 6n + 2 = 6*18 + 2 = 110
+    return ResNet(ResidualBlock, [18, 18, 18])
+
+
+models = {
+    "ResNet20": ResNet20(),
+    "ResNet32": ResNet32(),
+    "ResNet44": ResNet44(),
+    "ResNet56": ResNet56(),
+    "ResNet110": ResNet110(),
+}
 
 
 def load_data(path):
@@ -169,47 +202,76 @@ def evaluate(model, device, loader, criterion, writer):
     return accuracy
 
 
+def cmdline_args():
+    # Make parser object
+    p = argparse.ArgumentParser(
+        description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter
+    )
+
+    p.add_argument("-e", "--epochs", type=int, default=128, help="number of epochs")
+    p.add_argument(
+        "modelname",
+        type=str,
+        choices=list(models.keys()),
+        help="choose the a ResNet model to train",
+    )
+
+    return p.parse_args()
+
+
 if __name__ == "__main__":
-    # Set GPU if is_available
-    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    writer = SummaryWriter("runs/ResNet/44|128")
+    if sys.version_info < (3, 11, 0):
+        sys.stderr.write("You need python 3.11 or later to run this\n")
+        sys.exit(1)
+    try:
+        args = cmdline_args()
+        print(args)
+        output, epochs, model = args.output, args.epochs, args.modelname
+        n_epochs = epochs
+        output = f"cifar10_{model}_{epochs}"
 
-    _, _, trainloader, testloader = load_data(DATAPATH)
+        # Set GPU if is_available
+        device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+        writer = SummaryWriter(f"runs/CIFAR10/{args.model}|{n_epochs}")
 
-    net = ResNet44().to(device)
-    print("ResNet-44:")
+        _, _, trainloader, testloader = load_data(DATAPATH)
 
-    # Parameter count
-    total_params = sum(p.numel() for p in net.parameters() if p.requires_grad)
-    print(f"\nResNet-44 Total Trainable Parameters: {total_params:,}")
+        net = models[model].to(device)
+        print(f"{model}:")
 
-    # loss, optimizer and scheduler exactly as specified in Sec 4.2 (by epoch)
-    criterion = nn.CrossEntropyLoss()
-    optimizer = torch.optim.SGD(
-        net.parameters(), lr=learning_rate, momentum=0.9, weight_decay=1e-4
-    )
-    # 390 steps / epoch
-    # 32k/390 = 82 | 48k/390 = 123
-    scheduler = lr_scheduler.MultiStepLR(optimizer, milestones=[82, 123], gamma=0.1)
+        # Parameter count
+        total_params = sum(p.numel() for p in net.parameters() if p.requires_grad)
+        print(f"\n{model} Total Trainable Parameters: {total_params:,}")
 
-    # ensure model path exists
-    os.makedirs(MODELPATH, exist_ok=True)
+        # loss, optimizer and scheduler exactly as specified in Sec 4.2 (by epoch)
+        criterion = nn.CrossEntropyLoss()
+        optimizer = torch.optim.SGD(
+            net.parameters(), lr=learning_rate, momentum=0.9, weight_decay=1e-4
+        )
+        # 390 steps / epoch
+        # 32k/390 = 82 | 48k/390 = 123
+        scheduler = lr_scheduler.MultiStepLR(optimizer, milestones=[82, 123], gamma=0.1)
 
-    start = time.time()
-    train_model(net, device, trainloader, criterion, optimizer, scheduler, writer)
-    end = time.time()
-    final_accuracy = evaluate(net, device, testloader, criterion, writer)
-    print(
-        f"Final test accuracy: [{final_accuracy:.4f}] | Time take: [{end - start:.4f}]"
-    )
-    iterations_per_epoch = math.ceil(50000 / batch_size)  # ~391
-    total_iterations = iterations_per_epoch * n_epochs  # 391 * 64 = 25,024
-    print(
-        f"Epochs: [{n_epochs}] | Iterations: [{iterations_per_epoch} / {total_iterations}]"
-    )
+        # ensure model path exists
+        os.makedirs(MODELPATH, exist_ok=True)
 
-    save_path = os.path.join(MODELPATH, "resnet44_cifar10(128).pth")
-    torch.save(net.state_dict(), save_path)
-    print(f"Model state_dict saved to {save_path}")
+        start = time.time()
+        train_model(net, device, trainloader, criterion, optimizer, scheduler, writer)
+        end = time.time()
+        final_accuracy = evaluate(net, device, testloader, criterion, writer)
+        print(
+            f"Final test accuracy: [{final_accuracy:.4f}] | Time take: [{end - start:.4f}]"
+        )
+        iterations_per_epoch = math.ceil(50000 / batch_size)  # ~391
+        total_iterations = iterations_per_epoch * n_epochs  # 391 * 64 = 25,024
+        print(
+            f"Epochs: [{n_epochs}] | Iterations: [{iterations_per_epoch} / {total_iterations}]"
+        )
 
-    writer.close()
+        save_path = os.path.join(MODELPATH, f"{output}.pth")
+        torch.save(net.state_dict(), save_path)
+        print(f"Model state_dict saved to {save_path}")
+
+        writer.close()
+    except Exception:
+        print("Usage $python src/cifar10/train_cifar.py modelname [epochs] [output]")
