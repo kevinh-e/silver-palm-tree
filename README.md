@@ -106,10 +106,11 @@ Results are recorded from models trained locally on my setup:
 
 | Model         | Dataset      | Test Accuracy | Epochs | Parameters     | Training Time (s) |
 |---------------|--------------|---------------|--------|----------------|-------------------|
-| ResNet-20     | CIFAR-10     | 86.51%        | 64     | 0.27 Million   | 806.1353          |
-| ResNet-20     | CIFAR-10     | 91.10%        | 128    | 0.27 Million   | 1607.8371         |
-| ResNet-44     | CIFAR-10     | 92.81%        | 128    | 0.66 Million   | 3171.6705         |
-| ResNet-110    | CIFAR-10     | 92.93%        | 156    | 1.73 Million   | 9066.0921|
+| ResNet-20     | CIFAR-10     | **86.51%**    | 64     | 0.27 Million   | 806.1353          |
+| ResNet-20     | CIFAR-10     | **91.10%**    | 128    | 0.27 Million   | 1607.8371         |
+| ResNet-44     | CIFAR-10     | **92.81%**    | 128    | 0.66 Million   | 3171.6705         |
+| ResNet-110    | CIFAR-10     | **92.93%**    | 156    | 1.73 Million   | 9066.0921|
+
 | Model         | Dataset      | Test Accuracy | Epochs | Parameters     | Training Time (s) |
 |---------------|--------------|---------------|--------|----------------|-------------------|
 | ResNet-32     | Eye Disease  | 91.10%        | 156    | 0.66 Million   | 1607.8371         |
@@ -127,7 +128,7 @@ Ensure you have the following:
 - python (3.13.3)
 - CUDA / ROCm installed if availiable (CPU training takes a very long time)
 
-Badge### Installation
+### Installation
 
 1. Clone the repo
 
@@ -150,27 +151,27 @@ Badge### Installation
    pip install -r requirements.txt
    ```
 
-4. Install PyTorch for your setup:
--[PyTorch get started](https://pytorch.org/get-started/locally/)
+4. [Install PyTorch for your setup](<https://pytorch.org/get-started/locally/>)
 
 Now you can either train the model yourself or use the pretrained ones.
 
-#### Train models locally
+### Train models locally
 
-You can train the models on your own hardware by specifying the output path for the model
-Train the CIFAR10 Model:
+You can train the models on your own hardware and specify the epochs and model
 
-   ```sh
-   python3 src/train_cifar.py modelname [epochs] [output]
-   ```
-
-Train the Eye Disease Model:
+#### Train on CIFAR10
 
    ```sh
-   python3 src/train_eye.py modelname [epochs] [output]
+   python3 src/cifar10/train_cifar.py modelname [epochs]
    ```
 
-Trained models are stored in `./models/(RESNET_CIFAR10 | RESNET_EYE)/`
+#### Train on Eye Disease
+
+   ```sh
+   python3 src/cifar10/train_eye.py modelname [epochs]
+   ```
+
+Trained models are stored in `./models/(RESNET_CIFAR10 | RESNET_EYE)`.
 
 ### Testing your own images
 
@@ -191,24 +192,21 @@ You can test your own images to see which output class the model outputs.
 | Ship                   | Retinal Detachment                              |
 | Truck                  | Retinitis Pigmentosa                            |
 
-Run the pretrained CIFAR10 Model (ResNet-44 [128]):
+**Ensure your images are in `./src/images/`**
+Run a CIFAR10 Model:
 
    ```sh
-   python3 src/test_cifar.py [modelname]
+   python3 src/cifar10/test_cifar.py [modelname]
    ```
 
-Run the pretrained Eye Disease Model (ResNet-56 [150]):
+Run an Eye Disease Model:
 
    ```sh
-   python3 src/test_eye.py [modelname]
+   python3 src/cifar10/test_eye.py [modelname]
    ```
 
-You can test run the models you trained on your own images as long as they are in the project directory:
-
-   ```sh
-   python3 src/test_cifar.py -c modelpath imagepath
-   python3 src/test_eye.py -c modelpath imagepath
-   ```
+<br>
+Both models default to a ResNet110 model with 156 epochs.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -216,7 +214,7 @@ You can test run the models you trained on your own images as long as they are i
 <!-- LICENSE -->
 ## License
 
-Distributed under the Apache-2.0 License. See `LICENSE.txt` for more information.
+Distributed under the MIT License. See `LICENSE.txt` for more information.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -224,16 +222,11 @@ Distributed under the Apache-2.0 License. See `LICENSE.txt` for more information
 ## Contact
 
 Website - <https://kevinh.dev/>
+<br>
 Email - <contact@kevinh.dev>
+<br>
 Project Link: [https://github.com/kevinh-e/silver-palm-tree](https://github.com/kevinh-e/silver-palm-tree)
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-<!-- ACKNOWLEDGMENTS -->
-## Acknowledgments
-
-- [Choose an Open Source License](https://choosealicense.com)
-- [Img Shields](https://shields.io)
+<br>
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 

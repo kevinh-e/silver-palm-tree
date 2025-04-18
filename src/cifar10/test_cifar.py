@@ -5,7 +5,6 @@ from pathlib import Path
 import torch
 import torchvision.transforms as transforms
 from PIL import Image
-import numpy
 
 from train_cifar import ResNet110, ResNet20, ResNet32, ResNet44, ResNet56
 
@@ -194,6 +193,8 @@ if __name__ == "__main__":
 
         with torch.no_grad():
             output = model(input_batch)
+            if debug:
+                print(f"Predicted tensor{output}")
             print(classes[int(torch.max(output, 1)[1])])
 
     sys.exit(0)
