@@ -111,10 +111,13 @@ Results are recorded from models trained locally on my setup:
 | ResNet-44     | CIFAR-10     | **92.81%**    | 128    | 0.66 Million   | 3171.6705         |
 | ResNet-110    | CIFAR-10     | **92.93%**    | 156    | 1.73 Million   | 9066.0921|
 
-| Model         | Dataset      | Test Accuracy | Epochs | Parameters     | Training Time (s) |
-|---------------|--------------|---------------|--------|----------------|-------------------|
-| ResNet-20     | COVID        | 90.69%        | 128    | 0.66 Million   | 33780.2212        |
+| Model         | Dataset      | Test Accuracy | Epochs | Parameters     | Training Time (s) | Output Filters|
+|---------------|--------------|---------------|--------|----------------|-------------------|---------------|
+| ResNet-20     | COVID        | **85.96%**    | 64     | 1.09 Million   | 15649.8079        | 128           |
+| ResNet-20     | COVID        | **90.69%**    | 128    | 4.37 Million   | 33780.2212        | 256       |
+| ResNet-20[^1]     | COVID        | **91.97%**    | 96     | 1.09 Million   | 2873.8969     | 128           |
 
+[^1]: This ResNet-20 model was modified to downsample 2x at each layer resulting in an input size of 256x256x4 and output of 8x8x128.
 <!-- GETTING STARTED -->
 ## Usage
 
