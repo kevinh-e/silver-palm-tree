@@ -23,7 +23,7 @@
 </div>
 <!-- PROJECT LOGO -->
 <div align="center">
-  <h2 align="center">CIFAR10 and Eye Disease ResNet models</h2>
+  <h2 align="center">CIFAR10 and Lung Radiography ResNet models</h2>
 
   <p align="center">
     Deep Learning self taught project including multiple CNN and Residual CNN models
@@ -79,7 +79,7 @@ The project includes the implementation and training of two key models:
 A classic deep residual network, implemented from the ground up and trained on the [CIFAR-10](https://www.cs.toronto.edu/~kriz/cifar.html) dataset. This model follows the architecture and training procedure described in the original [ResNet](https://arxiv.org/abs/1512.03385) paper, including data augmentation, multi-step learning rate scheduling, and weight decay.
 
 2. Custom CNN on a Kaggle Open Dataset
-A second model trained on an open-source dataset from [Kaggle](https://www.kaggle.com/datasets/ruhulaminsharif/eye-disease-image-dataset), showcasing flexibility in applying deep learning fundamentals to a different, real-world dataset. This part of the project involved adapting preprocessing steps and tuning hyperparameters based on the unique characteristics of the dataset.
+A similar second model trained on the open-source dataset from [Kaggle][https://www.kaggle.com/datasets/tawsifurrahman/covid19-radiography-database], showcasing flexibility in applying deep learning fundamentals to a different, real-world dataset. This part of the project involved adapting preprocessing steps and tuning hyperparameters based on the unique characteristics of the dataset.
 
 ### What I Learned
 
@@ -113,8 +113,7 @@ Results are recorded from models trained locally on my setup:
 
 | Model         | Dataset      | Test Accuracy | Epochs | Parameters     | Training Time (s) |
 |---------------|--------------|---------------|--------|----------------|-------------------|
-| ResNet-32     | Eye Disease  | 91.10%        | 156    | 0.66 Million   | 1607.8371         |
-| ResNet-56     | Eye Disease  | 91.10%        | 156    | 0.66 Million   | 1607.8371         |
+| ResNet-20     | COVID        | 90.69%        | 128    | 0.66 Million   | 33780.2212        |
 
 <!-- GETTING STARTED -->
 ## Usage
@@ -165,13 +164,13 @@ You can train the models on your own hardware and specify the epochs and model
    python3 src/cifar10/train_cifar.py modelname [epochs]
    ```
 
-#### Train on Eye Disease
+#### Train on COVID dataset
 
    ```sh
-   python3 src/cifar10/train_eye.py modelname [epochs]
+   python3 src/cifar10/train_covid.py modelname [epochs]
    ```
 
-Trained models are stored in `./models/(RESNET_CIFAR10 | RESNET_EYE)`.
+Trained models are stored in `./models/(RESNET_CIFAR10 | RESNET_COVID)`.
 
 ### Testing your own images
 
@@ -179,18 +178,18 @@ You can test your own images to see which output class the model outputs.
 
 #### Label Reference
 
-| **CIFAR-10**           | **Eye Disease Dataset**                         |
+| **CIFAR-10**           | **COVID Radiography Dataset**                         |
 |------------------------|--------------------------------------------------|
-| Airplane               | Central Serous Chorioretinopathy - Color Fundus |
-| Automobile             | Diabetic Retinopathy                            |
-| Bird                   | Disc Edema                                      |
-| Cat                    | Glaucoma                                        |
-| Deer                   | Healthy                                         |
-| Dog                    | Macular Scar                                    |
-| Frog                   | Myopia                                          |
-| Horse                  | Pterygium                                       |
-| Ship                   | Retinal Detachment                              |
-| Truck                  | Retinitis Pigmentosa                            |
+| Airplane               | COVID-19                                        |
+| Automobile             | Lung Opacity|
+| Bird                   | Normal|
+| Cat                    | ViralPneumonia|
+| Deer                   | |
+| Dog                    | |
+| Frog                   | |
+| Horse                  | |
+| Ship                   | |
+| Truck                  | |
 
 **Ensure your images are in `./src/images/`**
 Run a CIFAR10 Model:
@@ -199,14 +198,15 @@ Run a CIFAR10 Model:
    python3 src/cifar10/test_cifar.py [modelname]
    ```
 
-Run an Eye Disease Model:
+Run a COVID Model:
 
    ```sh
-   python3 src/cifar10/test_eye.py [modelname]
+   python3 src/covid/test_covid.py [modelname]
    ```
 
 <br>
-Both models default to a ResNet110 model with 156 epochs.
+The CIFAR10 model defaults to a ResNet110 model with 156 epochs.
+The COVID model default to a ResNet20 model with 128 epochs (5 Residual Block layers).
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -229,6 +229,17 @@ Project Link: [https://github.com/kevinh-e/silver-palm-tree](https://github.com/
 <br>
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+## References
+
+-M.E.H. Chowdhury, T. Rahman, A. Khandakar, R. Mazhar, M.A. Kadir, Z.B. Mahbub, K.R. Islam, M.S. Khan, A. Iqbal, N. Al-Emadi, M.B.I. Reaz, M. T. Islam, “Can AI help in screening Viral and COVID-19 pneumonia?” IEEE Access, Vol. 8, 2020, pp. 132665 - 132676.
+
+[Paper link](https://ieeexplore.ieee.org/document/9144185)
+
+<br>
+-Rahman, T., Khandakar, A., Qiblawey, Y., Tahir, A., Kiranyaz, S., Kashem, S.B.A., Islam, M.T., Maadeed, S.A., Zughaier, S.M., Khan, M.S. and Chowdhury, M.E., 2020. Exploring the Effect of Image Enhancement Techniques on COVID-19 Detection using Chest X-ray Images.
+
+[Paper link](https://doi.org/10.1016/j.compbiomed.2021.104319)
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
