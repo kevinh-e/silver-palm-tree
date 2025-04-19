@@ -16,9 +16,9 @@
 *** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
 *** https://www.markdownguide.org/basic-syntax/#reference-style-links
 -->
-<div align"center">
+<div align="center">
     <img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/kevinh-e/silver-palm-tree?style=flat&color=gold">
-    <img alt="License" src="https://img.shields.io/badge/Apache_2.0-License-blue?style=flat&logo=apache">
+    <img alt="GitHub License" src="https://img.shields.io/github/license/kevinh-e/silver-palm-tree">
     <img alt="LinkedIn" src="https://img.shields.io/badge/%40kevinhedev-linkedin-blue?style=flat">
 </div>
 <!-- PROJECT LOGO -->
@@ -104,6 +104,8 @@ Results are recorded from models trained locally on my setup:
 
 ### Final Model Performance
 
+#### CIFAR10 dataset
+
 | Model         | Dataset      | Test Accuracy | Epochs | Parameters     | Training Time (s) |
 |---------------|--------------|---------------|--------|----------------|-------------------|
 | ResNet-20     | CIFAR-10     | **86.51%**    | 64     | 0.27 Million   | 806.1353          |
@@ -111,13 +113,14 @@ Results are recorded from models trained locally on my setup:
 | ResNet-44     | CIFAR-10     | **92.81%**    | 128    | 0.66 Million   | 3171.6705         |
 | ResNet-110    | CIFAR-10     | **92.93%**    | 156    | 1.73 Million   | 9066.0921|
 
-| Model         | Dataset      | Test Accuracy | Epochs | Parameters     | Training Time (s) | Output Filters|
-|---------------|--------------|---------------|--------|----------------|-------------------|---------------|
-| ResNet-20     | COVID        | **85.96%**    | 64     | 1.09 Million   | 15649.8079        | 128           |
-| ResNet-20     | COVID        | **90.69%**    | 128    | 4.37 Million   | 33780.2212        | 256       |
-| ResNet-20[^1]     | COVID        | **91.97%**    | 96     | 1.09 Million   | 2873.8969     | 128           |
+#### COVID Radiography dataset
 
-[^1]: This ResNet-20 model was modified to downsample 2x at each layer resulting in an input size of 256x256x4 and output of 8x8x128.
+| Model         | Test Accuracy | Epochs | Parameters     | Training Time (s) | Output Filters|
+|---------------|---------------|--------|----------------|-------------------|---------------|
+| ResNet-20     | **85.96%**    | 64     | 1.09 Million   | 15649.8079        | 128           |
+| ResNet-20     |  **90.69%**    | 128    | 4.37 Million   | 33780.2212        | 256       |
+| ResNet-20[^1]     |  **91.97%**    | 96     | 1.09 Million   | 2873.8969     | 128           |
+
 <!-- GETTING STARTED -->
 ## Usage
 
