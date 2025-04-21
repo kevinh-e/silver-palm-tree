@@ -16,37 +16,26 @@
 *** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
 *** https://www.markdownguide.org/basic-syntax/#reference-style-links
 -->
-<div align="center">
-    <img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/kevinh-e/silver-palm-tree?style=flat&color=gold">
-    <img alt="GitHub License" src="https://img.shields.io/github/license/kevinh-e/silver-palm-tree">
-    <img alt="LinkedIn" src="https://img.shields.io/badge/%40kevinhedev-linkedin-blue?style=flat">
-</div>
-<!-- PROJECT LOGO -->
-<div align="center">
-  <h2 align="center">CIFAR10 and Lung Radiography ResNet models</h2>
-
-  <p align="center">
-    Deep Learning self taught project including multiple CNN and Residual CNN models
-    <a href="https://github.com/kevinh-e/silver-palm-tree/issues/new?labels=bug&template=bug-report---.md">Report Bug</a>
-    <br />
-  </p>
-</div>
-
-<!-- TABLE OF CONTENTS -->
 <details>
   <summary>Table of Contents</summary>
   <ol>
     <li>
       <a href="#about-the-project">About The Project</a>
       <ul>
-        <li><a href="#what-i-learned">What I learned</a></li>
+        <li><a href="#what-i-learned">What I Learned</a></li>
       </ul>
     </li>
     <li>
-      <a href="#results">Model Results</a>
+      <a href="#results">Results</a>
       <ul>
-        <li><a href="#training-setup">Training setup</a></li>
-        <li><a href="#final-model-performance">Model performance</a></li>
+        <li><a href="#training-setup">Training Setup</a></li>
+        <li>
+          <a href="#final-model-performance">Final Model Performance</a>
+          <ul>
+            <li><a href="#cifar10-dataset">CIFAR10 dataset</a></li>
+            <li><a href="#covid-radiography-dataset">COVID Radiography dataset</a></li>
+          </ul>
+        </li>
       </ul>
     </li>
     <li>
@@ -54,13 +43,25 @@
       <ul>
         <li><a href="#prerequisites">Prerequisites</a></li>
         <li><a href="#installation">Installation</a></li>
+        <li>
+          <a href="#train-models-locally">Train models locally</a>
+          <ul>
+            <li><a href="#train-on-cifar10">Train on CIFAR10</a></li>
+            <li><a href="#train-on-covid-dataset">Train on COVID dataset</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="#testing-your-own-images">Testing your own images</a>
+          <ul>
+            <li><a href="#label-reference">Label Reference</a></li>
+            <li><a href="#custom-images">Custom images</a></li>
+          </ul>
+        </li>
       </ul>
     </li>
-    <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#contributing">Contributing</a></li>
     <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
-    <li><a href="#acknowledgments">Acknowledgments</a></li>
+    <li><a href="#references">References</a></li>
   </ol>
 </details>
 
@@ -106,21 +107,27 @@ Results are recorded from models trained locally on my setup:
 
 #### CIFAR10 dataset
 
-| Model         | Dataset      | Test Accuracy | Epochs | Parameters     | Training Time (s) |
-|---------------|--------------|---------------|--------|----------------|-------------------|
-| ResNet-20     | CIFAR-10     | **86.51%**    | 64     | 0.27 Million   | 806.1353          |
-| ResNet-20     | CIFAR-10     | **91.10%**    | 128    | 0.27 Million   | 1607.8371         |
-| ResNet-44     | CIFAR-10     | **92.81%**    | 128    | 0.66 Million   | 3171.6705         |
-| ResNet-110    | CIFAR-10     | **92.93%**    | 156    | 1.73 Million   | 9066.0921|
+| Model         | Test Accuracy | Epochs | Parameters     | Training Time (s) |
+|---------------|---------------|--------|----------------|-------------------|
+| ResNet-20     | **86.51%**    | 64     | 0.27 Million   | 806.1353          |
+| ResNet-20     | **91.10%**    | 128    | 0.27 Million   | 1607.8371         |
+| ResNet-44     | **92.81%**    | 128    | 0.66 Million   | 3171.6705         |
+| ResNet-110    | **92.93%**    | 156    | 1.73 Million   | 9066.0921|
 
 #### COVID Radiography dataset
 
-| Model         | Test Accuracy | Epochs | Parameters     | Training Time (s) | Output Filters|
+| Model       | Test Accuracy | Epochs | Parameters     | Training Time (s) | Output Filters|
 |---------------|---------------|--------|----------------|-------------------|---------------|
 | ResNet-20     | **85.96%**    | 64     | 1.09 Million   | 15649.8079        | 128           |
 | ResNet-20     |  **90.69%**    | 128    | 4.37 Million   | 33780.2212        | 256       |
-| ResNet-20[^1]     |  **91.97%**    | 96     | 1.09 Million   | 2873.8969     | 128           |
+| ResNet-20[^1] |  **91.97%**    | 96     | 1.09 Million   | 2873.8969     | 128           |
+| ResNet-32[^1] |  **93.19%**    | 100     | 1.88 Million   | 4348.6050        | 128           |
 
+[^1]: model was trained with higher downsampling:
+
+```
+256*256*4 --> 8x8x128
+```
 <!-- GETTING STARTED -->
 ## Usage
 
@@ -184,18 +191,29 @@ You can test your own images to see which output class the model outputs.
 
 #### Label Reference
 
-| **CIFAR-10**           | **COVID Radiography Dataset**                         |
-|------------------------|--------------------------------------------------|
-| Airplane               | COVID-19                                        |
-| Automobile             | Lung Opacity|
-| Bird                   | Normal|
-| Cat                    | ViralPneumonia|
-| Deer                   | |
-| Dog                    | |
-| Frog                   | |
-| Horse                  | |
-| Ship                   | |
-| Truck                  | |
+| **CIFAR-10** |
+|-----------|
+| Airplane     |
+| Automobile   |
+| Bird         |
+| Cat          |
+| Deer         |
+| Dog          |
+| Frog         |
+| Horse        |
+| Ship         |
+| Truck        |
+
+<br>
+
+| **COVID Radiography**  |
+|------------------------|
+|COVID-19|
+|Lung Opacity|
+|Normal|
+|Viral Pneumonia|
+
+#### Custom images
 
 **Ensure your images are in `./src/images/`**
 Run a CIFAR10 Model:
@@ -212,7 +230,7 @@ Run a COVID Model:
 
 <br>
 The CIFAR10 model defaults to a ResNet110 model with 156 epochs.
-The COVID model default to a ResNet20 model with 128 epochs (5 Residual Block layers).
+The COVID model default to a ResNet20 model with 96 epochs (4 Residual Block layers + extra downsampling).
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
