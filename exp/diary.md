@@ -30,3 +30,12 @@
     Test Loss: 0.2973, Test Accuracy: 0.9293
     Final test accuracy: [0.9293] | Time take: [9066.0921]
     Epochs: [156] | Iterations: [391 / 60996]
+
+## COVID |ResNet
+
+1. ResNet-20 | 5 layers | 128 Epochs
+
+2. ResNet-20 | 4 layers | 64 Epochs
+
+3. ResNet-30 | 4 layers | 96 Epochs | conv1 and conv2 downscale from 1x -> 2x
+    - output size is 8x8

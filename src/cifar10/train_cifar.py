@@ -226,13 +226,13 @@ if __name__ == "__main__":
     try:
         args = cmdline_args()
         print(args)
-        output, epochs, model = args.output, args.epochs, args.modelname
+        epochs, model = args.epochs, args.modelname
         n_epochs = epochs
         output = f"cifar10_{model}_{epochs}"
 
         # Set GPU if is_available
         device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-        writer = SummaryWriter(f"runs/CIFAR10/{args.model}|{n_epochs}")
+        writer = SummaryWriter(f"runs/CIFAR10/{args.modelname}|{n_epochs}")
 
         _, _, trainloader, testloader = load_data(DATAPATH)
 
