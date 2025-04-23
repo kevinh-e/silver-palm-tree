@@ -16,6 +16,23 @@
 *** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
 *** https://www.markdownguide.org/basic-syntax/#reference-style-links
 -->
+
+<div align="center">
+    <img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/kevinh-e/silver-palm-tree?style=flat&color=gold">
+    <img alt="GitHub License" src="https://img.shields.io/github/license/kevinh-e/silver-palm-tree">
+    <img alt="LinkedIn" src="https://img.shields.io/badge/%40kevinhedev-linkedin-blue?style=flat">
+</div>
+<!-- PROJECT LOGO -->
+<div align="center">
+  <h2 align="center">CIFAR10 and Lung Radiography ResNet models</h2>
+
+  <p align="center">
+    Deep Learning self taught project including multiple CNN and Residual CNN models
+    <a href="https://github.com/kevinh-e/silver-palm-tree/issues/new?labels=bug&template=bug-report---.md">Report Bug</a>
+    <br />
+  </p>
+</div>
+
 <details>
   <summary>Table of Contents</summary>
   <ol>
